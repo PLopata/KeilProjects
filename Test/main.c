@@ -7,7 +7,12 @@
 #define LED3_bm 0x80000
 #define LED0123_bm 0x000f0000
 
-//current excercise: 16
+
+
+//current excercise: 20
+//enum ButtonState {RELEASD, PRESSED} eButtonState;
+
+enum KeyboardState {RELEASED, BUTTON_0, BUTTON_1, BUTTON_2, BUTTON_3} eButtonState;
 
 void MsDelay(iMsNumber)
 {
@@ -17,6 +22,11 @@ void MsDelay(iMsNumber)
 	{
 		iDelayVariable++;
 	}
+}
+
+void KeyboardInit()
+{
+	IO0DIR=(IO0DIR & ~(0xf0));
 }
 
 void LedInit()
@@ -34,35 +44,68 @@ void LedOn(unsigned char ucLedIndeks)
 	else if(ucLedIndeks=='2') IO1SET=LED2_bm;
 	else if(ucLedIndeks=='3') IO1SET=LED3_bm;
 }
-
-int iReadButton1()
+/*
+enum ButtonState eReadButton1()
 {
-	IO0DIR=0x0;
-	IO0SET=0x10;
-	if(IO0PIN==0x10) return 1;
-	else return 0;
+	//IO0DIR=IO0DIR &(~0x10);
+	if((IO0PIN & 0x10) != 0) return RELEASD;
+	else return PRESSED;
+}
+*/
+
+enum KeyboardState eReadButton()
+{
+	if ((IO0PIN & 0x10) == 0) return BUTTON_0;
+	else if ((IO0PIN & 0x40) == 0) return BUTTON_1;
+	else if ((IO0PIN & 0x20) == 0) return BUTTON_2;
+	else if ((IO0PIN & 0x80) == 0) return BUTTON_3;
+	else return RELEASED;
 }
 
 int main()
 {
-	IO0DIR=0x0;
-	IO0SET=0x10;
 	IO1DIR=LED0123_bm;
-	
-	
+	KeyboardInit();
 	while(1)
 		{
-			//unsigned char iBut1State = iReadButton1();
-			if((IO0PIN & 0x10 )== 0) IO1SET=LED0_bm;
-			else IO1CLR=LED0123_bm;
+			eButtonState=eReadButton();
 			
+			switch (eButtonState)
+				{
+					case BUTTON_0:
+						IO1CLR=LED0123_bm;
+						IO1SET=LED0_bm;
+						break;
+					case BUTTON_1:
+						IO1CLR=LED0123_bm;
+						IO1SET=LED1_bm;
+						break;
+					case BUTTON_2:
+						IO1CLR=LED0123_bm;
+						IO1SET=LED2_bm;
+						break;
+					case BUTTON_3:
+						IO1CLR=LED0123_bm;
+						IO1SET=LED3_bm;
+						break;
+					case RELEASED:
+						IO1CLR=LED0123_bm;
+						break;
+				}
 			
-			
-			
-			
-			
-			
-			
+			/*
+			if (eButtonState == PRESSED)
+			{
+				IO1CLR=LED0123_bm;
+				IO1SET=LED1_bm;
+			}
+			else 
+			{	
+				IO1CLR=LED0123_bm;
+				IO1SET=LED0_bm;
+			}
+				
+			*/
 			
 			/*
 			LedInit();
@@ -75,8 +118,8 @@ int main()
 			MsDelay(250);
 			*/
 			
-			
-/*			LedInit();
+			/*
+			LedInit();
 			MsDelay(250);
 			IO1CLR=LED0_bm;
 			IO1SET=LED1_bm;
@@ -87,6 +130,7 @@ int main()
 			IO1CLR=LED2_bm;
 			IO1SET=LED3_bm;
 			MsDelay(250);
-			IO1CLR=LED3_bm;*/
+			IO1CLR=LED3_bm;
+			*/
 		}
 }
