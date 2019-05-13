@@ -12,8 +12,10 @@ void MsDelay(int iMsNumber)
 	}
 }
 
-enum LedState {WAIT, LED_RIGHT, LED_LEFT} eLedState;
+enum LedState {WAIT, WAIT10, LED_RIGHT, LED_LEFT} eLedState;
 enum LedState eLedState = WAIT;
+
+unsigned char ucWaitCounter=0;
 
 int main()
 {
@@ -27,6 +29,10 @@ int main()
 						if ( eReadButton() == BUTTON_1 )
 						{
 							eLedState = WAIT;
+						}
+						else if ( eReadButton() == BUTTON_3 )
+						{
+							eLedState = WAIT10;
 						}
 						else 
 						{
@@ -51,6 +57,17 @@ int main()
 						else if ( eReadButton() == BUTTON_2 )
 						{
 							eLedState = LED_RIGHT;
+						}
+						break;
+					case WAIT10:
+						if ( ucWaitCounter == 9 )
+						{
+							eLedState = LED_RIGHT;
+							ucWaitCounter = 0;
+						}
+						else
+						{
+							ucWaitCounter++;
 						}
 						break;
 				}
