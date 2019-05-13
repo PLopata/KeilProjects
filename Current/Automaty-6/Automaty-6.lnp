@@ -1,9 +1,0 @@
---cpu ARM7TDMI
-".\startup.o"
-".\keyboard.o"
-".\led.o"
-".\main.o"
---strict --scatter ".\Automaty-6.sct"
---summary_stderr --info summarysizes --map --xref --callgraph --symbols
---info sizes --info totals --info unused --info veneers
---list ".\Automaty-6.map" -o .\Automaty-6.axf
