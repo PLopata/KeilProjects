@@ -39,31 +39,4 @@ void LedLeft(void)
 	LedOn(uiLedPointer);
 }
 
-/*
-enum Direction {LEFT, RIGHT};
-
-void LedStep(enum Direction eDirection)
-{
-	static unsigned int uiLedPointer=0; 
-	if( eDirection == LEFT)
-	{
-		uiLedPointer=(uiLedPointer+1)%4;
-		LedOn(uiLedPointer);
-	}
-	else
-	{
-		uiLedPointer=(uiLedPointer-1)%4;
-		LedOn(uiLedPointer);	
-	}
-}
-
-void LedStepLeft()
-{
-	LedStep(LEFT);
-}
-
-void LedStepRight()
-{
-	LedStep(RIGHT);
-}
-*/
+/* usuniete komentarze */
