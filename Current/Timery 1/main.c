@@ -12,4 +12,6 @@ int main()
 			LedLeft();
 			WaitOnTimer0(1);
 		}
+		/* git test 1 */
+		/* test git */
 }

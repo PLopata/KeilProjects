@@ -4,8 +4,6 @@
 #include "keyboard.h"
 #include "timer.h"
 
-/* test gita */
-
 int main()
 {
 	LedInit();
@@ -16,4 +14,5 @@ int main()
 			LedLeft();
 			WaitOnTimer0Match0();
 		}
+		/* git test 2 */
 }
