@@ -14,5 +14,4 @@ int main()
 			LedLeft();
 			WaitOnTimer0Match0();
 		}
-		/* git test 2 */
 }

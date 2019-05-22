@@ -10,8 +10,6 @@ int main()
 	while(1)
 		{
 			LedLeft();
-			WaitOnTimer0(1);
+			WaitOnTimer0(250000);
 		}
-		/* git test 1 */
-		/* test git */
 }
