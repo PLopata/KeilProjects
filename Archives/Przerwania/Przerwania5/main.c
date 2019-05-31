@@ -57,8 +57,9 @@ int main ()
 {
 	unsigned int iMainLoopCtr;
 	LedInit();
-	Timer0Interrupts_Init(20000, &Automat );
-
+	//Timer0Interrupts_Init(20000, &Automat );
+	Timer1Interrupts_Init(20000, &Automat );
+	
 	while(1)
 	{
 	 	iMainLoopCtr++;

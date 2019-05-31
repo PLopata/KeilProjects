@@ -93,7 +93,7 @@ int main ()
 	unsigned int iMainLoopCtr;
 	LedInit();
 	DetectorInit();
-	Timer0Interrupts_Init(10, &Automat );
+	Timer0Interrupts_Init(40000, &Automat );
 
 	while(1)
 	{
