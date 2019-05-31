@@ -99,15 +99,25 @@ void ServoInit(unsigned int uiServoFrequency)
 	unsigned int uiTimePeriod;
 	
 	uiTimePeriod = 1000000/uiServoFrequency;
-	sServo.eState =CALLIB;
+	sServo.eState = CALLIB;
+	DetectorInit();
 	LedInit();
 	Timer0Interrupts_Init((uiTimePeriod), &Automat );
 }
 
+void ServoCallib()
+{
+	sServo.eState = CALLIB;
+}
+
+void ServoGoTo( unsigned int uiPosition )
+{
+	sServo.uiDesiredPosition = uiPosition;
+}
+
 int main ()
 {
-	DetectorInit();
-	ServoInit(50);
+	ServoInit(100000);
 	while(1)
 	{
 		enum KeyboardState eKeyboard = eReadButton();
@@ -116,22 +126,22 @@ int main ()
 		{
 			case BUTTON_0:
 			{
-				sServo.eState = CALLIB;
+				ServoCallib();
 				break;
 			}
 			case BUTTON_1:
 			{
-				sServo.uiDesiredPosition = 12;
+				ServoGoTo(12);
 				break;
 			}
 			case BUTTON_2:
 			{
-				sServo.uiDesiredPosition = 24;
+				ServoGoTo(24);
 				break;
 			}
 			case BUTTON_3:
 			{
-				sServo.uiDesiredPosition = 36;
+				ServoGoTo(36);
 				break;
 			}
 			default:
