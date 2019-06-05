@@ -117,7 +117,7 @@ void ServoGoTo( unsigned int uiPosition )
 
 int main ()
 {
-	ServoInit(100000);
+	ServoInit(20);
 	while(1)
 	{
 		enum KeyboardState eKeyboard = eReadButton();

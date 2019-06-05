@@ -24,69 +24,6 @@ enum DetectorState eReadDetector()
 	}
 }
 
-void Automat1(void)
-{
-	static enum State {CALLIB, LED_LEFT, LED_RIGHT, WAIT} eLedState = CALLIB;
-
-	switch ( eLedState )
-	{
-		case CALLIB:
-		{
-			if ( eReadDetector() == INACTIVE )
-			{
-				eLedState = CALLIB;
-				LedStepLeft();
-			}
-			else 
-			{
-				eLedState = WAIT;
-			}
-			break;
-		}
-		case LED_LEFT:
-		{
-			if ( eReadButton() == BUTTON_1 )
-			{
-				eLedState = WAIT;
-			}
-			else 
-			{
-				eLedState = LED_LEFT;
-				LedStepLeft();
-			}
-			break;
-		}
-		case LED_RIGHT:
-		{
-			if ( eReadButton() == BUTTON_1 )
-			{
-				eLedState = WAIT;
-			}
-			else 
-			{
-				eLedState = LED_RIGHT;
-				LedStepRight();
-			}
-			break;
-		}
-		case WAIT:
-		{
-			if ( eReadButton() == BUTTON_0 )
-			{
-				eLedState = LED_LEFT;
-			}
-			else if ( eReadButton() == BUTTON_2 )
-			{
-				eLedState = LED_RIGHT;
-			}
-			else 
-			{
-				eLedState = WAIT;
-			}
-			break;
-		}
-	}
-}
 
 enum ServoState {CALLIB, IDLE, IN_PROGRESS};
 

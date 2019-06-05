@@ -6,7 +6,10 @@
 
 int main ()
 {
-	ServoInit(100000);
+	ServoInit(50);
+	ServoGoTo(24);
+	ServoGoTo(12);
+	
 	while(1)
 	{
 		enum KeyboardState eKeyboard = eReadButton();

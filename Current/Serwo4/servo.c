@@ -99,18 +99,20 @@ void ServoInit(unsigned int uiServoFrequency)
 	unsigned int uiTimePeriod;
 	
 	uiTimePeriod = 1000000/uiServoFrequency;
-	sServo.eState = CALLIB;
 	DetectorInit();
 	LedInit();
 	Timer0Interrupts_Init((uiTimePeriod), &Automat );
+	ServoCallib();
 }
 
 void ServoCallib()
 {
 	sServo.eState = CALLIB;
+	while ( sServo.eState != IDLE ) {} 
 }
 
 void ServoGoTo( unsigned int uiPosition )
 {
 	sServo.uiDesiredPosition = uiPosition;
+	while ( sServo.eState != IDLE ){}
 }
